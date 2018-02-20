@@ -152,6 +152,10 @@
 
 	qcom,disable-busy-time-burst;
 
+	/* Disable wake on touch */
+	qcom,disable-wake-on-touch;
+
+	qcom,disable-busy-time-burst;
 	qcom,gpu-pwrlevel-bins {
 		#address-cells = <1>;
 		#size-cells = <0>;
