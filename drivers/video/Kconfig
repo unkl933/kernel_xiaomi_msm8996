@@ -65,6 +65,6 @@ if FB || SGI_NEWPORT_CONSOLE
 	source "drivers/video/logo/Kconfig"
 
 endif
-
+source "drivers/video/klapse/Kconfig"
 
 endmenu

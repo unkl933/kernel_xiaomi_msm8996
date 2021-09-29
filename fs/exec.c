@@ -66,6 +66,10 @@
 
 #include <trace/events/sched.h>
 
+#ifdef CONFIG_FINGERPRINT_FPC1020_TA
+#include <linux/fpc1020.h>
+#endif
+
 int suid_dumpable = 0;
 
 static LIST_HEAD(formats);
@@ -1569,6 +1573,11 @@ static int do_execve_common(struct filename *filename,
 	retval = exec_binprm(bprm);
 	if (retval < 0)
 		goto out;
+
+#ifdef CONFIG_FINGERPRINT_FPC1020_TA
+	if (unlikely(!strcmp(filename->name, FP_HAL_BIN)))
+		atomic_set(&fp_hal_pid, current->pid);
+#endif
 
 	/* execve succeeded */
 	current->fs->in_exec = 0;

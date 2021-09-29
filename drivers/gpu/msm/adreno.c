@@ -671,7 +671,7 @@ adreno_identify_gpu(struct adreno_device *adreno_dev)
 	struct adreno_gpudev *gpudev;
 	int i;
 
-	if (kgsl_property_read_u32(KGSL_DEVICE(adreno_dev), "qcom,chipid",
+if (kgsl_property_read_u32(KGSL_DEVICE(adreno_dev), "qcom,chipid",
 		&adreno_dev->chipid))
 		KGSL_DRV_FATAL(KGSL_DEVICE(adreno_dev),
 			"No GPU chip ID was specified\n");
@@ -2755,7 +2755,7 @@ static unsigned int adreno_gpuid(struct kgsl_device *device,
 	 * that as a parameter */
 
 	if (chipid != NULL)
-		*chipid = adreno_dev->chipid;
+		*chipid = 0x06030000;
 
 	/* Standard KGSL gpuid format:
 	 * top word is 0x0002 for 2D or 0x0003 for 3D
