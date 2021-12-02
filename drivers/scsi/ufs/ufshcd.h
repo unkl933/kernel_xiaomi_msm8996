@@ -310,12 +310,13 @@ struct ufs_pwr_mode_info {
  * @remove_debugfs: used to remove debugfs entries
  */
 struct ufs_hba_variant_ops {
+	const char *name;
 	int	(*init)(struct ufs_hba *);
 	void	(*exit)(struct ufs_hba *);
 	u32	(*get_ufs_hci_version)(struct ufs_hba *);
 	int	(*clk_scale_notify)(struct ufs_hba *, bool,
 				    enum ufs_notify_change_status);
-	int	(*setup_clocks)(struct ufs_hba *, bool, bool);
+	int	(*setup_clocks)(struct ufs_hba *, bool);
 	int	(*setup_regulators)(struct ufs_hba *, bool);
 	int	(*hce_enable_notify)(struct ufs_hba *,
 				     enum ufs_notify_change_status);
@@ -325,12 +326,16 @@ struct ufs_hba_variant_ops {
 					enum ufs_notify_change_status status,
 					struct ufs_pa_layer_attr *,
 					struct ufs_pa_layer_attr *);
-	int	(*apply_dev_quirks)(struct ufs_hba *);
 	int	(*suspend)(struct ufs_hba *, enum ufs_pm_op);
 	int	(*resume)(struct ufs_hba *, enum ufs_pm_op);
 	int	(*full_reset)(struct ufs_hba *);
-	void	(*dbg_register_dump)(struct ufs_hba *hba);
 	int	(*update_sec_cfg)(struct ufs_hba *hba, bool restore_sec_cfg);
+	int	(*crypto_engine_cfg)(struct ufs_hba *, unsigned int);
+	int	(*crypto_engine_reset)(struct ufs_hba *);
+	int	(*crypto_engine_eh)(struct ufs_hba *);
+	int	(*crypto_engine_get_err)(struct ufs_hba *);
+	void	(*crypto_engine_reset_err)(struct ufs_hba *);
+	void	(*dbg_register_dump)(struct ufs_hba *hba);
 #ifdef CONFIG_DEBUG_FS
 	void	(*add_debugfs)(struct ufs_hba *hba, struct dentry *root);
 	void	(*remove_debugfs)(struct ufs_hba *hba);
