@@ -9919,7 +9919,7 @@ void csrRoamJoinedStateMsgProcessor( tpAniSirGlobal pMac, void *pMsgBuf )
             tCsrRoamSession  *pSession;
             tSirSmeAssocIndToUpperLayerCnf *pUpperLayerAssocCnf;
             tCsrRoamInfo *roam_info;
-            tANI_U32 sessionId;
+            tANI_U32 sessionId = 0;
             eHalStatus status;
             smsLog( pMac, LOG1, FL("ASSOCIATION confirmation can be given to upper layer "));
             pUpperLayerAssocCnf = (tSirSmeAssocIndToUpperLayerCnf *)pMsgBuf;
@@ -18003,7 +18003,7 @@ eHalStatus csrGetRssi(tpAniSirGlobal pMac,
 
    pMsg->msgType = pal_cpu_to_be16((tANI_U16)eWNI_SME_GET_RSSI_REQ);
    pMsg->msgLen = (tANI_U16)sizeof(tAniGetRssiReq);
-   pMsg->sessionId = sessionId;
+   pMsg->sessionId = sessionId = 0;
    pMsg->staId = staId;
    pMsg->rssiCallback = callback;
    pMsg->pDevContext = pContext;
